@@ -12,8 +12,20 @@ using Vector3 = UnityEngine.Vector3;
 
 public class SpaceObjectManager : MonoBehaviour
 {
-    
+    [SerializeField] private StartingShape startingShape = StartingShape.Square;
       // Reference to the BarnesHutSimulation component
+    [SerializeField] private int numberOfRings = 5;
+    [SerializeField] private int spirals = 10;
+    [SerializeField] private float holeSize = 50f;
+    public enum StartingShape
+    {
+        Square,
+        Circle,
+        Rings,
+        Tail,
+        Spiral
+    }
+    
     private BarnesHutSimulation barnesHutSimulationInstance;
     [SerializeField] float gravConstant = 1.00f;
     [SerializeField] float timeSpeed = 0.10f;
@@ -57,11 +69,13 @@ public class SpaceObjectManager : MonoBehaviour
         {
             if(!testMode)
             {
-                CreateSpaceObject(i);
+                Vector3 initialPosition = GetInitialPosition(startingShape, i);
+                Debug.Log("startingShape = " + startingShape);
+                CreateSpaceObject(i, startPosition: initialPosition);
             }
             else
             {
-                CreateSpaceObject(i, 1, 10, "planet_earth", new Vector3 (0,0,0), testPositions(i));
+                CreateSpaceObject(i, startPosition: testPositions(i));
             }
             
         }
@@ -78,6 +92,159 @@ public class SpaceObjectManager : MonoBehaviour
     InitializeBarnesHutSimulation();
         }
 
+    
+    private Vector3 GetInitialPosition(StartingShape shape, int index)
+    {
+        switch (shape)
+        {
+            case StartingShape.Square:
+                return SquareStartPosition();
+            case StartingShape.Circle:
+                return CircleStartPosition();
+            case StartingShape.Rings:
+                return RandomConcentricRingPosition();
+            case StartingShape.Tail:
+                return SingleRadialStartPosition();
+            case StartingShape.Spiral:
+                return MultiRadialStartPosition();
+
+            default:
+                Debug.LogError("Invalid starting shape: " + shape);
+                return Vector3.zero;
+        }
+    }
+
+    private Vector3 SquareStartPosition()
+    {
+        // Debug.Log("SquareStartPositon Called");
+        float minDistance = sunSize + 1; // Minimum distance from the sun
+
+        float xPos, yPos;
+
+            xPos = UnityEngine.Random.Range(-posRange, posRange);
+            yPos = UnityEngine.Random.Range(-posRange, posRange);
+        
+        return new Vector3(xPos, yPos, 0);
+
+    }
+
+private Vector3 CircleStartPosition()
+{
+    Debug.Log("CircleStartPositon Called");
+    float minDistance = sunSize + 1; // Minimum distance from the sun
+
+    float xPos, yPos;
+
+    double distanceFromCentreOfCircle;
+    double circleRadius = posRange;
+    double theta;
+
+    double randOne = UnityEngine.Random.Range(0, 10000)/10000f;
+    double randTwo = UnityEngine.Random.Range(0, 10000)/10000f;
+
+
+    distanceFromCentreOfCircle = circleRadius * System.Math.Sqrt(randOne);
+    theta = randTwo * 2 * System.Math.PI;
+
+    double xPosDouble = distanceFromCentreOfCircle * System.Math.Cos(theta);
+    double yPosDouble = distanceFromCentreOfCircle * System.Math.Sin(theta);
+
+    xPos = (float)xPosDouble;
+    yPos = (float)yPosDouble;
+
+    return new Vector3(xPos, yPos, 0);
+
+}
+
+private Vector3 SingleRadialStartPosition()
+{
+    Debug.Log("Multi Radial Start called");
+
+    float radius = UnityEngine.Random.Range(holeSize, posRange);
+    
+    float angle = UnityEngine.Random.Range(0f, (360f / spirals)); // Random angle in degrees
+
+    // Calculate the ring index
+    int ringIndex = Mathf.FloorToInt(radius / (posRange / numberOfRings));
+
+    // Calculate the ring index
+    int spiralsIndex = Mathf.FloorToInt(angle / (360f / spirals));
+
+    Debug.Log("First Angle = " + angle);
+
+    float spiralsSegment = UnityEngine.Random.Range(0, spirals);
+
+    // Calculate the angle adjustment based on the selected spirals segment
+    float segmentAngle = 360f / (spirals * 2);
+    // angle += spiralsSegment * segmentAngle;
+
+    // Calculate Cartesian coordinates based on polar coordinates
+    float xPos = radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+    float yPos = radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+
+    return new Vector3(xPos, yPos, 0);
+}
+
+
+private Vector3 MultiRadialStartPosition()
+{
+    Debug.Log("Radial Start called");
+
+    float radius = UnityEngine.Random.Range(holeSize, posRange);
+
+    float segment = 360 / (spirals * 2);
+    
+    float angle = UnityEngine.Random.Range(0f, segment); // Random angle in degrees
+
+    Debug.Log("First Angle = " + angle);
+
+    Debug.Log("segment = " + segment);
+
+    // Calculate the ring index
+    int spiralsIndex = Mathf.FloorToInt((angle / segment)*spirals);
+    
+    angle += angle * spiralsIndex * 2;
+
+    Debug.Log("radius = " + radius);
+    Debug.Log("segment = " + segment);
+    Debug.Log("spiralsIndex = " + spiralsIndex);
+    Debug.Log("angle = " + angle);
+
+    // Calculate Cartesian coordinates based on polar coordinates
+    float xPos = radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+    float yPos = radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+
+    return new Vector3(xPos, yPos, 0);
+}
+
+private Vector3 RandomConcentricRingPosition()
+{
+    Debug.Log("RandomRings called");
+
+    float angle = UnityEngine.Random.Range(0f, 360f); // Random angle in degrees
+
+    int ring = UnityEngine.Random.Range(0, numberOfRings);
+
+    float radius = UnityEngine.Random.Range(0, posRange);
+
+    // Calculate the ring index
+    int ringIndex = Mathf.FloorToInt(radius / (posRange / numberOfRings));
+
+    // Ensure the rings have blank spaces between them
+    float blankSpace = 50f; // Adjust this value as needed
+
+
+    radius += blankSpace + blankSpace * ringIndex * 2;
+
+
+    // Calculate Cartesian coordinates based on polar coordinates
+    float xPos = radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+    float yPos = radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+
+    return new Vector3(xPos, yPos, 0);
+}
+
+    
     private Vector3 testPositions(float i)
     {
         float xPos, yPos;
@@ -119,7 +286,7 @@ public class SpaceObjectManager : MonoBehaviour
     private void CreateSpaceObject(int number, float? size = null, float? mass = null, string spriteType = "planet_earth", Vector3? startVelocity = null, Vector3? startPosition = null, bool fixedPosition = false)
     {
 
-        Vector3 initialPosition = startPosition.HasValue ? startPosition.Value : InitialPositionSetter();
+        Vector3 initialPosition = startPosition.HasValue ? startPosition.Value : SquareStartPosition();
 
         Vector3 initialVelocity = new Vector3(0, 0, 0);
         
@@ -187,22 +354,6 @@ public class SpaceObjectManager : MonoBehaviour
         int yVelocity = UnityEngine.Random.Range(-velRange, velRange);
         return new Vector3(xVelocity, yVelocity, 0);
     }
-
-private Vector3 InitialPositionSetter()
-{
-    float minDistance = sunSize + 1; // Minimum distance from the sun
-
-    float xPos, yPos;
-
-        xPos = UnityEngine.Random.Range(-posRange, posRange);
-        yPos = UnityEngine.Random.Range(-posRange, posRange);
-    
-    /* while 
-    (Vector3.Distance(new Vector3(xPos, yPos, 0), sunPosition) < minDistance); */
-
-    return new Vector3(xPos, yPos, 0);
-
-}
 
 
     private void ObjectsLooper(GameObject spaceObjectPrefab)

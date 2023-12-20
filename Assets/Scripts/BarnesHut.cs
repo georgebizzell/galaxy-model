@@ -24,7 +24,7 @@ public enum Quadrant
 
 public class BarnesHutSimulation : MonoBehaviour
 {
-    public float GravitationalConstant = 0.025f;
+    public float GravitationalConstant = 0.05f;
     
     private int interactionCount = 0;  // Counter variable
 

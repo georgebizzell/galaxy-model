@@ -181,7 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa1c8cb3c7d49cfbb6368f777c2872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravConstant: 0.85
+  startingShape: 3
+  numberOfRings: 5
+  spirals: 20
+  holeSize: 50
+  gravConstant: 0.8
   timeSpeed: 1
   sunMass: 1000000
   sunSize: 30
@@ -191,10 +195,10 @@ MonoBehaviour:
   squareSize: 1
   sunPosition: {x: 0, y: 0, z: 0}
   sunVelocity: {x: 0, y: 0, z: 0}
-  posRange: 750
+  posRange: 1000
   velRange: 20
   sizeRange: 8
-  numberOfBeings: 5000
+  numberOfBeings: 2000
   testMultiplier: 1
   spaceObjects: []
   planets: []
