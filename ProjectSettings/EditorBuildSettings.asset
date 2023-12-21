@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpaceMusic.unity
     guid: 7f900938cb56e474f937f3310f725ade
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 9bd590394d591407ab7d9e04efd34399
   m_configObjects: {}
