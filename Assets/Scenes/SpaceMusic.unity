@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa1c8cb3c7d49cfbb6368f777c2872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingShape: 3
+  startingShape: 0
   numberOfRings: 5
   spirals: 20
   holeSize: 50

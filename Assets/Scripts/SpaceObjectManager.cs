@@ -12,11 +12,6 @@ using Vector3 = UnityEngine.Vector3;
 
 public class SpaceObjectManager : MonoBehaviour
 {
-    [SerializeField] private StartingShape startingShape = StartingShape.Square;
-      // Reference to the BarnesHutSimulation component
-    [SerializeField] private int numberOfRings = 5;
-    [SerializeField] private int spirals = 10;
-    [SerializeField] private float holeSize = 50f;
     public enum StartingShape
     {
         Square,
@@ -25,6 +20,12 @@ public class SpaceObjectManager : MonoBehaviour
         Tail,
         Spiral
     }
+    public static StartingShape startingShape = StartingShape.Square;
+
+    // Reference to the BarnesHutSimulation component
+    [SerializeField] private int numberOfRings = 5;
+    [SerializeField] private int spirals = 10;
+    [SerializeField] private float holeSize = 50f;
     
     private BarnesHutSimulation barnesHutSimulationInstance;
     [SerializeField] float gravConstant = 1.00f;
@@ -58,6 +59,14 @@ public class SpaceObjectManager : MonoBehaviour
     private void Start()
     {
         
+        int startingShapeInt = PlayerPrefs.GetInt("StartingShape");
+
+        Debug.Log("PlayerPrefAttempt = " + startingShapeInt);
+       
+        // Convert the integer to StartingShape enum
+        
+        SpaceObjectManager.StartingShape startingShape = (SpaceObjectManager.StartingShape)startingShapeInt;
+
         spriteRadiusDictionary.Add("planet_orange", 1.60f);
         spriteRadiusDictionary.Add("planet_red", 1.60f);
         spriteRadiusDictionary.Add("planet_earth", 2.00f);
@@ -93,7 +102,7 @@ public class SpaceObjectManager : MonoBehaviour
         }
 
     
-    private Vector3 GetInitialPosition(StartingShape shape, int index)
+    private Vector3 GetInitialPosition(SpaceObjectManager.StartingShape shape, int index)
     {
         switch (shape)
         {
