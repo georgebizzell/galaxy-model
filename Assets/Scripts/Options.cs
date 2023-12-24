@@ -28,6 +28,12 @@ public class Options : MonoBehaviour
 public Button squareButton;
 public Button circleButton;
 
+public Button ringsButton;
+public Button spiralButton;
+
+public Button tailButton;
+
+
 public void OptionOnAnyButton ()
 {
     SceneManager.LoadScene(0);
