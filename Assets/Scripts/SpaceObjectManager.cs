@@ -28,7 +28,7 @@ public class SpaceObjectManager : MonoBehaviour
     [SerializeField] private float holeSize = 50f;
     
     private BarnesHutSimulation barnesHutSimulationInstance;
-    [SerializeField] float gravConstant = 1.00f;
+    [SerializeField] float gravConstant = 0.05f;
     [SerializeField] float timeSpeed = 0.10f;
     [SerializeField] float sunMass = 1.00f;
     [SerializeField] float sunSize = 10f;
