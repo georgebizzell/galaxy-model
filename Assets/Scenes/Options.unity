@@ -607,7 +607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 203, y: -83.612}
+  m_AnchoredPosition: {x: 164, y: -83.612}
   m_SizeDelta: {x: 363.45, y: 21.2559}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &371429518
@@ -655,9 +655,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1090169617}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5000
-  m_WholeNumbers: 0
-  m_Value: 2500
+  m_MaxValue: 6000
+  m_WholeNumbers: 1
+  m_Value: 1000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1876,7 +1876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 203, y: 106.87}
+  m_AnchoredPosition: {x: 164, y: 106.87}
   m_SizeDelta: {x: -620, y: -300.0197}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &918929995
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Centre mass
+  m_text: Central mass
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2010,7 +2010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 203, y: -43.744}
+  m_AnchoredPosition: {x: 164, y: -43.744003}
   m_SizeDelta: {x: -620, y: -300.0197}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921314997
@@ -2505,7 +2505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 203, y: 67}
+  m_AnchoredPosition: {x: 164, y: 67}
   m_SizeDelta: {x: 363.45, y: 21.2559}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1455000638
@@ -2553,9 +2553,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 600630866}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 3000000
+  m_MaxValue: 10000000
   m_WholeNumbers: 0
-  m_Value: 1000000
+  m_Value: 2000000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2683,8 +2683,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingShape: 0
+  centreMass: 1000000
   squareButton: {fileID: 31521831}
   circleButton: {fileID: 593970725}
+  ringsButton: {fileID: 430193349}
+  spiralButton: {fileID: 884055478}
+  tailButton: {fileID: 821119265}
+  centreMassSlider: {fileID: 1455000638}
+  numberOfStarsSlider: {fileID: 371429518}
+  numberOfStars: 0
+  centreOfMass: 0
 --- !u!1 &1675330492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,7 +2907,6 @@ GameObject:
   - component: {fileID: 2118616639}
   - component: {fileID: 2118616638}
   - component: {fileID: 2118616637}
-  - component: {fileID: 2118616640}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2957,21 +2964,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2118616640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118616636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caab25cb54fc942019cf9310bb50ea6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingShape: 0
-  squareButton: {fileID: 0}
-  circleButton: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

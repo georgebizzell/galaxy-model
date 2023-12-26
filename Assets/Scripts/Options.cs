@@ -23,6 +23,8 @@ public class Options : MonoBehaviour
         return startingShape;
     }
 
+    public float centreMass = 1000000; 
+
 
 // Assign buttons in the Inspector
 public Button squareButton;
@@ -33,11 +35,39 @@ public Button spiralButton;
 
 public Button tailButton;
 
+public Slider centreMassSlider;
+
+public Slider numberOfStarsSlider;
+
+public float numberOfStars;
+
+public float centreOfMass;
+
+public void Start()
+{
+    Debug.Log("Centre Mass Slider is - " + centreMassSlider);
+    //Adds a listener to the main slider and invokes a method when the value changes.
+    centreMassSlider.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
+    numberOfStarsSlider.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
+}
+
+// Invoked when the value of the slider changes.
+public void ValueChangeCheck()
+{
+    Debug.Log("Centre Mass Slider from ValueChangeCheck - " + centreMassSlider.value);
+    Debug.Log(numberOfStarsSlider.value);
+    centreOfMass = centreMassSlider.value;
+    numberOfStars = numberOfStarsSlider.value;
+    PlayerPrefs.SetInt("centreMass", (int)centreMassSlider.value);
+    PlayerPrefs.SetInt("numberOfStars", (int)numberOfStarsSlider.value);
+}
+
 
 public void OptionOnAnyButton ()
 {
     SceneManager.LoadScene(0);
 }
+
 
 public void OnSquareButton()
 {

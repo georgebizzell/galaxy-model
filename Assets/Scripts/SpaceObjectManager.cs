@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
-
+using UnityEngine.UI;
 // Implement Barnes–Hut_simulation using grids
 
 public class SpaceObjectManager : MonoBehaviour
@@ -21,6 +21,9 @@ public class SpaceObjectManager : MonoBehaviour
         Spiral
     }
     public static StartingShape startingShape = StartingShape.Square;
+
+    public Slider numberOfStarsSlider;
+    public Slider centreMassSlider;
 
     // Reference to the BarnesHutSimulation component
     [SerializeField] private int numberOfRings = 5;
@@ -36,12 +39,11 @@ public class SpaceObjectManager : MonoBehaviour
     [SerializeField] bool testMode = false;
     [SerializeField] float squareStart = 0f;
     [SerializeField] float squareSize = 1f;
-    [SerializeField] Vector3 sunPosition = new Vector3(-10f, -10f, 0f);
+    [SerializeField] Vector3 sunPosition = new Vector3(0f, 0f, 0f);
     [SerializeField] Vector3 sunVelocity = new Vector3(0f, 0f, 0f);
     [SerializeField] int posRange = 100;
     [SerializeField] int velRange = 1;
     [SerializeField] float sizeRange = 20f;
-    [SerializeField] int numberOfBeings = 4;
 
     [SerializeField] float testMultiplier = 1;
 
@@ -55,12 +57,17 @@ public class SpaceObjectManager : MonoBehaviour
 
     public List<Rigidbody2D> planetRigidbodies = new List<Rigidbody2D>();
 
+    public int centreMass;
+
 
     private void Start()
     {
         
+        int numberOfBeings = PlayerPrefs.GetInt("numberOfStars");
+        centreMass = PlayerPrefs.GetInt("centreMass");
         int startingShapeInt = PlayerPrefs.GetInt("StartingShape");
 
+        
         Debug.Log("PlayerPrefAttempt = " + startingShapeInt);
        
         // Convert the integer to StartingShape enum
@@ -71,6 +78,8 @@ public class SpaceObjectManager : MonoBehaviour
         spriteRadiusDictionary.Add("planet_red", 1.60f);
         spriteRadiusDictionary.Add("planet_earth", 2.00f);
         spriteRadiusDictionary.Add("planet_yellow", 1.60f );
+
+        Debug.Log("centremass before calling createsun() is ===" + centreMass);
 
         CreateSun();
 
@@ -284,7 +293,8 @@ private Vector3 RandomConcentricRingPosition()
         int spriteIndex = spriteList.IndexOf(spriteType);
         if (spriteIndex >= 0)
         {
-            CreateSpaceObject(100000, sunSize, sunMass, spriteType, sunVelocity, sunPosition, true);
+            Debug.Log("Sun centre mass is ===== " + centreMass);
+            CreateSpaceObject(1000000, sunSize, centreMass, spriteType, sunVelocity, sunPosition, true);
         }
         else
         {

@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa1c8cb3c7d49cfbb6368f777c2872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfStarsSlider: {fileID: 0}
+  centreMassSlider: {fileID: 0}
   numberOfRings: 5
   spirals: 20
   holeSize: 50
@@ -197,11 +199,11 @@ MonoBehaviour:
   posRange: 1000
   velRange: 20
   sizeRange: 8
-  numberOfBeings: 2000
   testMultiplier: 1
   spaceObjects: []
   planets: []
   planetRigidbodies: []
+  centreMass: 0
 --- !u!114 &134185078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75c82ee6d4864c14a14853f17d7ec1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simulationScript: {fileID: 0}
 --- !u!1 &168562177
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 599, y: -330}
+  m_AnchoredPosition: {x: 690, y: -421}
   m_SizeDelta: {x: 97.3841, y: 35.594}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &741261518
@@ -716,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75c82ee6d4864c14a14853f17d7ec1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simulationScript: {fileID: 0}
 --- !u!1 &1535635896
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,7 +731,6 @@ GameObject:
   - component: {fileID: 1535635900}
   - component: {fileID: 1535635899}
   - component: {fileID: 1535635898}
-  - component: {fileID: 1535635897}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -735,24 +738,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1535635897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535635896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caab25cb54fc942019cf9310bb50ea6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingShape: 0
-  squareButton: {fileID: 0}
-  circleButton: {fileID: 0}
-  ringsButton: {fileID: 0}
-  spiralButton: {fileID: 0}
-  tailButton: {fileID: 0}
 --- !u!114 &1535635898
 MonoBehaviour:
   m_ObjectHideFlags: 0
