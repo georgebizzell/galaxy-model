@@ -39,9 +39,9 @@ public Slider centreMassSlider;
 
 public Slider numberOfStarsSlider;
 
-public float numberOfStars;
+public float numberOfStars = 1000;
 
-public float centreOfMass;
+public float centreOfMass = 1000000;
 
 public void Start()
 {
